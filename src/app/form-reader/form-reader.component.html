@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="all-container">
+    <div class="obs-container">
+
+
+      <mat-grid-list [cols]=columns rowHeight="66.25px">
+        <form #form="ngForm">
+          <mat-grid-tile *ngFor="let tile of form;index as i" [rowspan]="tile.tile.rows" [colspan]="tile.tile.cols">
+
+            <div *ngIf="tile.tile.rows > tile.tile.cols; else rowBlock" fxLayout="column" fxLayoutAlign="space-evenly stretch" [ngStyle]="{width:'100%', height: '100%'}">
+
+              <mat-form-field *ngFor="let field of tile.fields" appearance="outline">
+                <mat-label>{{field.label}}</mat-label>
+                <input matInput  name="{{field.data}}" #dta="ngModel" [(ngModel)]="field.data" placeholder="{{field.placeholder}}">
+              </mat-form-field>
+            </div>
+
+            <ng-template  #rowBlock>
+              <div fxLayout="row" fxLayoutAlign="space-evenly stretch" [ngStyle]="{width:'100%'}">
+
+                <mat-form-field *ngFor="let field of tile.fields" appearance="outline">
+                  <mat-label>{{field.label}}</mat-label>
+                  <input matInput name="{{field.data}}" #dta="ngModel" [(ngModel)]="field.data"  placeholder="{{field.placeholder}}">
+                </mat-form-field>
+              </div>
+            </ng-template>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]=columns>
+            <button mat-raised-button color="primary" type="button" (click)="submit(form)">SUBMIT</button>
+          </mat-grid-tile>
+        </form>
+      </mat-grid-list>
+
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 mat-grid-tile {
-  /* border: 1px solid red; */
+  border: 1px solid red;
   overflow: visible;
   /* height: 10%; */
 }
@@ -47,7 +47,7 @@ mat-form-field {
 }
 
 .example-box {
-  width: 630px;
+  width: 420px;
   height: auto;
   border: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
