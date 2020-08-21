@@ -13,8 +13,16 @@ mat-form-field {
   font-size: 12px;
 }
 
+.box-row {
+  display: flex;
+}
+
 .col {
   padding: 0;
+}
+
+.row {
+  display: block;
 }
 
 .ADD {
@@ -47,7 +55,7 @@ mat-form-field {
 }
 
 .example-box {
-  width: 630px;
+  width: 730px;
   height: auto;
   border: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
@@ -71,4 +79,33 @@ mat-form-field {
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
               0 8px 10px 1px rgba(0, 0, 0, 0.14),
               0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.radio-group {
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  margin: 15px 0;
+  left:0;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 0px;
+  font-size: 12px;
+
+}
+
+.mat-radio-label {
+  padding-right: 8px;
+}
+
+
+.radio-group-label {
+
+  left:0;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 0px;
+  /* font-size: 12px; */
 }

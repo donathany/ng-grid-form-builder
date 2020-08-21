@@ -16,6 +16,7 @@ export class AppComponent implements OnInit{
   bd = true;
   formName = "";
   selected=0;
+  addType=0;
 
   // fieldlist= [1,2,3];
 
@@ -33,13 +34,34 @@ export class AppComponent implements OnInit{
     console.log(form.value);
   }
 
+  addOption(form:NgForm, index) {
+    if(form.value.label == ""){
+      window.alert("Can't leave label empty");
+    }
+    else {
+      // this.formService.blocklist[index].fields.push({type: 0, "label":form.value.label, "placeholder":"placeholder", data:"data"});
+      this.formService.blocklist[this.selected].fields[index].options.push({value: form.value.value, viewValue: form.value.viewValue});
+      // console.log(this.formService.blocklist[index]);
+      // console.log(this.formService.blocklist);
+      console.log(form.value);
+    }
+  }
+  removeOption(index) {
+    if (this.formService.blocklist[this.selected].fields[index].options.length > 0) {
+      this.formService.blocklist[this.selected].fields[index].options.pop();
+    }
+
+  }
+
   onSubmit(form:NgForm, index) {
+    // console.log(form.value);
     if(form.value.label == ""){
       window.alert("Can't leave label empty");
     }
     else {
 
-      this.formService.blocklist[index].fields.push({"label":form.value.label, "placeholder":"placeholder", data:"data"});
+      // this.formService.blocklist[index].fields.push({type: 0, "label":form.value.label, "placeholder":"placeholder", data:"data"});
+      this.formService.blocklist[index].fields.push({type: parseInt(form.value.type), label:"label", options: [], placeholder:"placeholder", data:"data"});
       // console.log(this.formService.blocklist[index]);
       console.log(this.formService.blocklist);
       // console.log(form.value.label);
@@ -56,7 +78,7 @@ export class AppComponent implements OnInit{
     if (tile.fields.length >= limit) {
       tile.done = true;
       console.log(limit);
-      console.log(tile.tile.rows);
+      console.log(tile.size.rows);
       console.log(tile.done);
     }
   }
@@ -65,6 +87,14 @@ export class AppComponent implements OnInit{
     if(form!= null)
       form.resetForm();
     this.formService.b = {
+      type: 0,
+      label: "",
+      options: [],
+      placeholder: "",
+      data: ""
+    }
+    this.formService.dp = {
+      type: 4,
       label: "",
       placeholder: "",
       data: ""
@@ -72,6 +102,10 @@ export class AppComponent implements OnInit{
     this.formService.t = {
       rows: 1,
       cols: 1
+    }
+    this.formService.o = {
+      value: "",
+      viewValue: ""
     }
   }
 
@@ -88,7 +122,13 @@ export class AppComponent implements OnInit{
   }
 
   addTile(form:NgForm) {
-    this.formService.blocklist.push({tile:form.value, fields:[], done: false});
+
+    if(this.selected < 0)
+    {
+      this.selected = 0;
+    }
+
+    this.formService.blocklist.push({size:form.value, fields:[], done: false});
     // this.formService.blocklist[Object.keys(this.formService.blocklist).length]=[];
     // console.log(Object.keys(this.formService.blocklist).length)
 
@@ -97,6 +137,10 @@ export class AppComponent implements OnInit{
 
   removeTile(){
     this.formService.blocklist.pop();
+
+    if (this.selected > this.formService.blocklist.length - 1) {
+      this.selected = this.formService.blocklist.length -1;
+    }
     console.log(this.formService.blocklist.length);
   }
 

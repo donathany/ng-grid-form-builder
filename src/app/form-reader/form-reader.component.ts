@@ -11,18 +11,18 @@ import { Form, NgForm } from '@angular/forms';
 
 export class FormReaderComponent implements OnInit {
 
-  form: any = (data as any).default;
-  columns= 3;
+  // form: any = (data as any).default;
+  // columns= 3;
 
 
   constructor(public formService: FormService) { }
 
   ngOnInit(): void {
-    console.log(data);
+    // console.log(data);
   }
 
-  submit(form: NgForm) {
-    console.log(form.value);
-  }
+  // submit(form: NgForm) {
+  //   console.log(form.value);
+  // }
 
 }

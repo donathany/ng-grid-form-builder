@@ -4,15 +4,36 @@ import { HttpClient } from '@angular/common/http';
 import { parseSelectorToR3Selector } from '@angular/compiler/src/core';
 
 
-export interface block {
+export interface field {
+  type: number;
   label: String;
-  placeholder: String;
+  options?: Option[];
+  placeholder?: String;
   data: String;
 }
 
-export interface tile {
+export interface size {
   rows?: number;
   cols?: number;
+}
+
+export interface Option {
+  value: string;
+  viewValue: string;
+}
+
+export interface dateField {
+  type: number;
+  label: String;
+  placeholder?: String;
+  data: String;
+
+}
+
+export interface tile {
+  size: size;
+  fields: field[];
+  done: boolean;
 }
 
 @Injectable({
@@ -20,17 +41,23 @@ export interface tile {
 })
 export class FormService {
 
-  b: block;
+  b: field;
+  o: Option;
   e= [{label:"", placeholder: ""}];
-  t: tile;
+  t: size;
   // blocklist= [];
-  defaultTile = {rows: 1, cols: 1};
+  defaultsize = {rows: 1, cols: 1};
+  g: field = {type: 1, label: "Dropdown", options: [{value: "abc", viewValue: "abc"},{value: "def", viewValue: "def"}], placeholder: "placeholder", data: "data"}
+  h: field = {type: 2, label: "Checkbox", placeholder: "placeholder", data: "data"}
+  i: field = {type: 3, label: "Checkbox", options: [{value: "abc", viewValue: "abc"},{value: "def", viewValue: "def"}], placeholder: "placeholder", data: "data"}
+  dp: field = {type: 4, label: "Date", placeholder: "placeholder", data: "data"}
 
 
-  a = {tile: {rows: 4, cols: 1}, fields: [{label:"testlabel",placeholder:"testplaceholder"},{label:"test2label",placeholder:"testplaceholder"}], done:false};
-  c = {tile: {rows: 2, cols: 1}, fields: [{label:"otherlabel",placeholder:"testplaceholder"},{label:"other2label",placeholder:"testplaceholder"}], done: false};
+
+  // a = {size: {rows: 4, cols: 1}, fields: [{type:0, label:"testlabel",placeholder:"testplaceholder",data:"data"},{type:0, label:"test2label",placeholder:"testplaceholder",data:"data"}], done:false};
+  // c = {size: {rows: 2, cols: 1}, fields: [{type:0, label:"otherlabel",placeholder:"testplaceholder",data:"data"},{type:0, label:"other2label",placeholder:"testplaceholder",data:"data"}], done: false};
   // blocklist= [this.a, this.c];
-  blocklist = [{tile: {rows:1, cols: 1}, fields: [{label:"label",placeholder:"placeholder",data:"data"}], done: false}];
+  blocklist: tile[] = [{size: {rows:5, cols: 1}, fields: [{type: 0, label:"label",placeholder:"placeholder",data:"data"}, this.g, this.h], done: false}];
   constructor(private http: HttpClient) { }
 
   array_move(old_index, new_index) {
