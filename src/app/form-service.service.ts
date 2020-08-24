@@ -15,6 +15,8 @@ export interface field {
 export interface size {
   rows?: number;
   cols?: number;
+  header?: String;
+  expand?: number;
 }
 
 export interface Option {

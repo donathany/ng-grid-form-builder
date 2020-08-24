@@ -17,6 +17,7 @@ export class AppComponent implements OnInit{
   formName = "";
   selected=0;
   addType=0;
+  rowheight = {};
 
   // fieldlist= [1,2,3];
 
